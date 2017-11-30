@@ -36,9 +36,9 @@ const identityState = {
     return Object.assign({}, tab);
   },
 
-  async storeHidden(cookieStoreId, windowId) {
+  async storeHidden(cookieStoreId) {
     const containerState = await this.storageArea.get(cookieStoreId);
-    const tabsByContainer = await browser.tabs.query({cookieStoreId, windowId});
+    const tabsByContainer = await browser.tabs.query({cookieStoreId});
     tabsByContainer.forEach((tab) => {
       const tabObject = this._createTabObject(tab);
       if (!backgroundLogic.isPermissibleURL(tab.url)) {

@@ -44,7 +44,6 @@ const messageHandler = {
       case "hideTabs":
         backgroundLogic.hideTabs({
           cookieStoreId: m.cookieStoreId,
-          windowId: m.windowId
         });
         break;
       case "checkIncompatibleAddons":
@@ -53,13 +52,11 @@ const messageHandler = {
       case "moveTabsToWindow":
         response = backgroundLogic.moveTabsToWindow({
           cookieStoreId: m.cookieStoreId,
-          windowId: m.windowId
         });
         break;
       case "getTabs":
         response = backgroundLogic.getTabs({
           cookieStoreId: m.cookieStoreId,
-          windowId: m.windowId
         });
         break;
       case "queryIdentitiesState":

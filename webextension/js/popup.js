@@ -687,7 +687,6 @@ Logic.registerPanel(P_CONTAINER_INFO, {
       try {
         browser.runtime.sendMessage({
           method: identity.hasHiddenTabs ? "showTabs" : "hideTabs",
-          windowId: browser.windows.WINDOW_ID_CURRENT,
           cookieStoreId: Logic.currentCookieStoreId()
         });
         window.close();

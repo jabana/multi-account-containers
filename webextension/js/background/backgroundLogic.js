@@ -175,20 +175,11 @@ const backgroundLogic = {
     return await identityState.storageArea.set(cookieStoreId, containerState);
   },
 
-  async _closeTabs(userContextId, windowId = false) {
+  async _closeTabs(userContextId) {
     const cookieStoreId = this.cookieStoreId(userContextId);
     let tabs;
     /* if we have no windowId we are going to close all this container (used for deleting) */
-    if (windowId !== false) {
-      tabs = await browser.tabs.query({
-        cookieStoreId,
-        windowId
-      });
-    } else {
-      tabs = await browser.tabs.query({
-        cookieStoreId
-      });
-    }
+      tabs = await browser.tabs.query({cookieStoreId});
     const tabIds = tabs.map((tab) => tab.id);
     return browser.tabs.remove(tabIds);
   },
@@ -263,14 +254,14 @@ const backgroundLogic = {
   },
 
   async hideTabs(options) {
-    const requiredArguments = ["cookieStoreId", "windowId"];
+    const requiredArguments = ["cookieStoreId"];
     this.checkArgs(requiredArguments, options, "hideTabs");
-    const { cookieStoreId, windowId } = options;
+    const {cookieStoreId} = options;
 
     const userContextId = backgroundLogic.getUserContextIdFromCookieStoreId(cookieStoreId);
 
-    const containerState = await identityState.storeHidden(cookieStoreId, windowId);
-    await this._closeTabs(userContextId, windowId);
+    const containerState = await identityState.storeHidden(cookieStoreId);
+    await this._closeTabs(userContextId);
     return containerState;
   },
 

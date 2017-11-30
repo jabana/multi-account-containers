@@ -9,3 +9,4 @@ README.html
 addon.env
 
 webextension/web-ext-artifacts/*
+.idea
